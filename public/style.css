@@ -53,7 +53,7 @@ body {
     position: fixed;
     z-index: 3;
     width: 100%;
-    bottom: 80px;
+    bottom: 8vh;
     pointer-events: none;
 }
 
@@ -91,7 +91,7 @@ h1 {
     position: absolute;
     width: 200px;
     cursor: pointer;
-    filter: drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(0);
+    filter: drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0);
     transition: filter 0.3s ease-in;
     /* animation: fade 0.5s ease-out 1; */
     /* transition: transform 0.3s ease-in-out; */
@@ -139,60 +139,63 @@ h1 {
     margin-right: 30px;
 }
 
-#work-text {
-    width: 30%;
-    margin: 0 auto;
-    /* margin-bottom: 100px; */
-    font-family: 'xbi';
-    font-size: 1.6rem;
-}
-
 #work-images {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 10vh;
 }
 
-#first-work-image {
+.mediaWrap {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    margin-top: 100px;
-}
-
-#work-images div {
-    display: flex;
     justify-content: center;
-}
-
-#work-images div, #first-work-image div {
     margin: 0px 5px 100px 5px;
 }
 
-#work-images div img, #first-work-image div img, #work-images div video, #first-work-image div video {
-    width: 100%;
+.double-portrait-wrap {
+    display: block;
+}
+
+.mediaWrap img, .mediaWrap video {
+    height: 100%;
     padding: 0px 5px;
     /* cursor: zoom-in; */
     /* filter: drop-shadow(3px 3px 10px black); */
 }
 
+.media-text {
+    display: block;
+    width: 50%;
+}
+
 #extra {
     display: flex;
     justify-content: center;
-    margin-bottom: 240px;
+    margin-bottom: 30vh;
 }
 
 #extra p {
-    font-family: 'xbi';
-    text-align: center;
+    /* font-family: 'xbi'; */
+    /* text-align: center; */
     font-size: 1rem;
 }
 
+@keyframes clickMe {
+    0%   {transform: translateY(0px)}
+    10%  {transform: translateY(-2px)}
+    30%  {transform: translateY(0px)}
+    100% {transform: translateY(0px)}
+}
+
 #extra a {
+    position: absolute;
+    margin-left: 5px;
     color: black;
     text-decoration: none;
+    animation: clickMe 2s ease-out infinite;
 }
 
 #extra a:visited {
@@ -217,7 +220,7 @@ h1 {
     top: 0;
     right: 0;
     width: 180px;
-    filter: drop-shadow(2px 2px 8px rgb(172, 167, 167));
+    filter: drop-shadow(2px 2px 8px rgb(0, 0, 0));
 }
 
 #icons {
@@ -237,7 +240,7 @@ h1 {
     position: absolute;
     width: 30px;
     text-decoration: none;
-    filter: drop-shadow(0px 0px 0px rgb(172, 167, 167));
+    filter: drop-shadow(0px 0px 0px rgb(0, 0, 0));
 }
 
 .contactIconOuter img {
@@ -309,7 +312,7 @@ h1 {
 
     .homepageImgs {
         max-width: 95%;
-        filter: drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(1);
+        filter: drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1);
     }
 
     .homepageImgs:first-of-type {

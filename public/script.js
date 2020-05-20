@@ -27,7 +27,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 .then(res => {
     res.data.map(post => {
 
-        // console.log(post);
+        console.log(post);
         let work = post.acf;
         let title = work.name.replace(/<\/?[^>]+(>|$)/g, "");
         works[title] = {
@@ -35,11 +35,10 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             x: work.x,
             y: work.y,
             width: work.width,
-            description: work.description,
+            // description: work.description,
             dimensions: work.dimensions,
             materials: work.materials,
-            extra: work.extra,
-            extraLink: work.extra_link,
+            extra: work.extra_x,
             year: work.year,
             icon: work.icon,
             media: []
@@ -49,11 +48,15 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             let url = `${i}_image`;
             let type = `${i}_media_type`;
             let layout = `${i}_media_layout`;
+            let description = `${i}_description`;
+            let text = `${i}_text`;
             if (work[url]) {
                 let mediaObj = {
                     url: work[url],
                     type: work[type],
-                    layout: work[layout]
+                    layout: work[layout],
+                    description: work[description],
+                    text: work[text]
                 };
                 works[title].media.push(mediaObj);
             };
@@ -193,7 +196,7 @@ function init() {
             title.style.pointerEvents = 'none';
         };
         title.innerText = e.target.alt;
-        e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(1)';
+        e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
         document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
             e.target.style.animation = 'bounce 1s linear 2';
@@ -204,7 +207,7 @@ function init() {
         title.style.pointerEvents = 'auto';
         if (!workOpen) {
             title.innerText = 'Esther Merinero';
-            e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(0)';
+            e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
             document.body.style.backgroundColor = 'white';
         };
         if (!mobile) {
@@ -221,21 +224,21 @@ function init() {
             work.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 0.9)`;
 
             // text
-            workText.innerHTML = '';
-            if (works[e.target.alt].description) {
-                workText.innerHTML = works[e.target.alt].description;
-                // workImages.style.marginTop = '70px';
-            };
-            if (!mobile && workText.innerHTML === '') {
-                workText.style.marginBottom = '0px';
-            } else if (!mobile && workText.innerHTML !== '') {
-                workText.style.marginBottom = '100px';
-            };
-            if (mobile && workText.innerHTML === '') {
-                workText.style.marginBottom = '0px';
-            } else if (mobile && workText.innerHTML !== '') {
-                workText.style.marginBottom = '8px';
-            };
+            // workText.innerHTML = '';
+            // if (works[e.target.alt].description) {
+            //     workText.innerHTML = works[e.target.alt].description;
+            //     // workImages.style.marginTop = '70px';
+            // };
+            // if (!mobile && workText.innerHTML === '') {
+            //     workText.style.marginBottom = '0px';
+            // } else if (!mobile && workText.innerHTML !== '') {
+            //     workText.style.marginBottom = '100px';
+            // };
+            // if (mobile && workText.innerHTML === '') {
+            //     workText.style.marginBottom = '0px';
+            // } else if (mobile && workText.innerHTML !== '') {
+            //     workText.style.marginBottom = '8px';
+            // };
 
             // details
             workDeets.innerHTML = `<p>${works[e.target.alt].materials}</p>
@@ -248,6 +251,7 @@ function init() {
             let mediaLoadingCount = 0;
             for (var i = 0; i < works[e.target.alt].media.length; i++) {
                 let div = document.createElement('div');
+                div.classList.add('mediaWrap');
                 let elem = works[e.target.alt].media[i].type === 'image' ? document.createElement('img') : document.createElement('video');
                 elem.onload = () => {
                     mediaLoadingCount++;
@@ -265,21 +269,36 @@ function init() {
                 elem.classList.add('media');
                 elem.layout = works[e.target.alt].media[i].layout;
                 div.appendChild(elem);
+
+                // checking for description
+                if (works[e.target.alt].media[i].description) {
+                    let description = document.createElement('div');
+                    description.classList.add('media-description');
+                    description.innerHTML = works[e.target.alt].media[i].description;
+                    div.appendChild(description);
+                };
+
+                // checking for text
+                if (works[e.target.alt].media[i].text) {
+                    let text = document.createElement('div');
+                    text.classList.add('media-text');
+                    text.innerHTML = works[e.target.alt].media[i].text;
+                    div.appendChild(text);
+                };
+
                 mediaElements.push(div);
             };
 
             // extra info
-            extra.innerHTML = works[e.target.alt].extra.indexOf('<p>') === -1 ? `<p>${works[e.target.alt].extra}</p>` : works[e.target.alt].extra;
-            if (works[e.target.alt].extraLink) {
-                console.log(works[e.target.alt].extraLink);
-                let extraX = extra.innerHTML.replace(`${works[e.target.alt].extraLink.title}`, `<a href="${works[e.target.alt].extraLink.url}" target="_blank">${works[e.target.alt].extraLink.title}</a>`);
-                extra.innerHTML = extraX;
-            };
-            e.target.style.filter = mobile ? 'drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(172, 167, 167)) brightness(0)';
-            // work.style.display = 'flex';
+            extra.innerHTML = works[e.target.alt].extra.indexOf('<p>') === -1 ? `<p>${works[e.target.alt].extra}</p>` : `${works[e.target.alt].extra}`;
+            e.target.style.filter = mobile ? 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
+
+            // show
             work.style.display = 'block' ;
             work.scrollTop = 0;
             work.style.opacity = '1';
+
+            // loading if necessary
             setTimeout(() => {
                 if (workViewInner.style.display !== 'block') {
                     console.log(workViewInner.style.display);
@@ -299,24 +318,30 @@ function init() {
 
             for (let i = 0; i < media.length; i++) {
                 if (works[target].media[i].layout === 'horizontal-single') {
-                    media[i].parentElement.style.width = mobile ? '90%' : '60%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
+                    // media[i].parentElement.style.width = mobile ? '90%' : '60%';
                     media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'horizontal-small') {
-                    media[i].parentElement.style.width = mobile ? '90%' : '20%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '20%';
+                    // media[i].parentElement.style.width = mobile ? '90%' : '20%';
                     media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-single') {
-                    media[i].parentElement.style.width = mobile ? '90%' : '30%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
+                    // media[i].parentElement.style.width = mobile ? '90%' : '30%';
                     media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-small') {
-                    media[i].parentElement.style.width = mobile ? '90%' : '15%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '15%';
+                    // media[i].parentElement.style.width = mobile ? '90%' : '15%';
                     media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-double') {
-                    media[i].parentElement.style.width = mobile ? '90%' : '30%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
+                    // media[i].parentElement.style.width = mobile ? '90%' : '30%';
                     media[i].parentElement.style.display = 'inline-block';
                     portraitCount++;
                 };
                 if (portraitCount === 2 && !mobile) {
                     let div = document.createElement('div');
+                    div.classList.add('double-portrait-wrap');
                     let parent = media[i].parentElement.parentNode;
                     parent.insertBefore(div, media[i].parentElement);
                     div.appendChild(media[i - 1].parentElement);
