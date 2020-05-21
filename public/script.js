@@ -18,7 +18,9 @@ function loading() {
 
 loadingInt = setInterval(loading, 250);
 
-// get data
+// get work data
+let dataFetchCount = 0;
+
 let works = {};
 let icons = [];
 
@@ -27,7 +29,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 .then(res => {
     res.data.map(post => {
 
-        console.log(post);
+        // console.log(post);
         let work = post.acf;
         let title = work.name.replace(/<\/?[^>]+(>|$)/g, "");
         works[title] = {
@@ -65,8 +67,8 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
     });
 })
 .then(() => {
-    console.log(Object.entries(works));
-    console.log(works);
+    // console.log(Object.entries(works));
+    // console.log(works);
     let worksArr = Object.entries(works);
     for (var i = 0; i < worksArr.length; i++) {
         let title = worksArr[i][0];
@@ -76,7 +78,10 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             icons.push(icon);
             if (icons.length === worksArr.length) {
                 console.log('all loaded bb');
-                init();
+                dataFetchCount++;
+                if (dataFetchCount === 2) {
+                    init();
+                };
             };
         };
         icon.classList.add('homepageImgs');
@@ -87,7 +92,44 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         icon.src = details.icon;
     }
 })
-.catch(err => console.log(err));
+.catch(err => console.log('error fetching works >>> ', err));
+
+// get info data
+let info = {};
+let infoView = document.getElementById('info');
+let cornerImg = document.getElementById('cornerImg');
+let bio = document.getElementById('bio');
+let cv = document.getElementById('cv');
+let mail = document.getElementById('mail');
+let insta = document.getElementById('insta');
+let phone = document.getElementById('telephone');
+
+axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
+.then(res => {
+    let data = res.data[0].acf;
+    console.log(data);
+    info = {
+        bio: data.bio,
+        cv: data.cv,
+        image: data.image,
+        insta: data.instagram,
+        mail: data.mail,
+        phone: data.phone
+    };
+})
+.then(() => {
+    bio.innerHTML = info.bio;
+    cv.href = info.cv;
+    cornerImg.src = info.image;
+    insta.href = info.insta;
+    mail.href = `mailto:${info.mail}?subject=Hey%20Esther!`;
+    phone.href = info.phone;
+    dataFetchCount++;
+    if (dataFetchCount === 2) {
+        init();
+    };
+})
+.catch(err => console.log('error fetching info >>> ', err));
 
 function init() {
 
@@ -177,15 +219,37 @@ function init() {
                     infoOpen = false;
                 }, 400);
             } else {
-                info.style.display = mobile ? 'block' : 'flex';
+                infoView.style.display = mobile ? 'block' : 'flex';
                 document.body.style.overflowY = 'hidden';
                 setTimeout(() => {
-                    info.style.opacity = '1';
+                    infoView.style.opacity = '1';
                     title.innerText = 'close';
                     infoOpen = true;
                 }, 50);
             };
             setTimeout(() => {
+                transitioning = false;
+            }, 400);
+        };
+    };
+
+    function workClose(e) {
+        if ((e.target.id === 'work-view' || e.target.id === 'work-images') && !transitioning) {
+            transitioning = true;
+            work.style.opacity = '0';
+            title.innerText = 'Esther Merinero';
+            document.body.style.overflowY = 'scroll';
+            document.body.style.backgroundColor = 'white';
+            if (loadingInt) {
+                loadingWrap.style.display = 'none';
+                clearInterval(loadingInt);
+                loadingCount = 0;
+                loadingText.innerText = 'loading';
+            };
+            setTimeout(() => {
+                work.style.display = 'none';
+                workViewInner.style.display = 'none';
+                workOpen = false;
                 transitioning = false;
             }, 400);
         };
@@ -275,18 +339,20 @@ function init() {
                     let description = document.createElement('div');
                     description.classList.add('media-description');
                     description.innerHTML = works[e.target.alt].media[i].description;
+                    // mediaElements.push(description);
                     div.appendChild(description);
                 };
+
+                mediaElements.push(div);
 
                 // checking for text
                 if (works[e.target.alt].media[i].text) {
                     let text = document.createElement('div');
                     text.classList.add('media-text');
                     text.innerHTML = works[e.target.alt].media[i].text;
-                    div.appendChild(text);
+                    mediaElements.push(text);
                 };
 
-                mediaElements.push(div);
             };
 
             // extra info
@@ -320,19 +386,19 @@ function init() {
                 if (works[target].media[i].layout === 'horizontal-single') {
                     media[i].parentElement.style.height = mobile ? '90%' : '80vh';
                     // media[i].parentElement.style.width = mobile ? '90%' : '60%';
-                    media[i].parentElement.style.display = 'block';
+                    // media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'horizontal-small') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '20%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '20vh';
                     // media[i].parentElement.style.width = mobile ? '90%' : '20%';
-                    media[i].parentElement.style.display = 'block';
+                    // media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-single') {
                     media[i].parentElement.style.height = mobile ? '90%' : '80vh';
                     // media[i].parentElement.style.width = mobile ? '90%' : '30%';
-                    media[i].parentElement.style.display = 'block';
+                    // media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-small') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '15%';
+                    media[i].parentElement.style.height = mobile ? '90%' : '30vh';
                     // media[i].parentElement.style.width = mobile ? '90%' : '15%';
-                    media[i].parentElement.style.display = 'block';
+                    // media[i].parentElement.style.display = 'block';
                 } else if (works[target].media[i].layout === 'vertical-double') {
                     media[i].parentElement.style.height = mobile ? '90%' : '80vh';
                     // media[i].parentElement.style.width = mobile ? '90%' : '30%';
@@ -362,6 +428,7 @@ function init() {
 
     // event listeners
     title.addEventListener('click', titleClick);
+    work.addEventListener('click', (e) => workClose(e));
     for (var i = 0; i < imgs.length; i++) {
         imgs[i].addEventListener('mouseover', (e) => workMouseover(e));
         imgs[i].addEventListener('mouseleave', (e) => workMouseleave(e));
