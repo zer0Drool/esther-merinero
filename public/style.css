@@ -42,7 +42,7 @@ body {
 
 #loading-text {
     width: 220px;
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
@@ -66,7 +66,7 @@ h1 {
     text-align: center;
     word-spacing: 0.5em;
     line-height: 1.6;
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
