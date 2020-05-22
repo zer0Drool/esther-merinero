@@ -31,7 +31,8 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 
         // console.log(post);
         let work = post.acf;
-        let title = work.name.replace(/<\/?[^>]+(>|$)/g, "");
+        let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
+        console.log(title);
         works[title] = {
             rgb: `${work.r}, ${work.g}, ${work.b}`,
             x: work.x,
@@ -68,7 +69,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 })
 .then(() => {
     // console.log(Object.entries(works));
-    // console.log(works);
+    console.log(works);
     let worksArr = Object.entries(works);
     for (var i = 0; i < worksArr.length; i++) {
         let title = worksArr[i][0];
@@ -107,7 +108,7 @@ let phone = document.getElementById('telephone');
 axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
 .then(res => {
     let data = res.data[0].acf;
-    console.log(data);
+    // console.log(data);
     info = {
         bio: data.bio,
         cv: data.cv,
