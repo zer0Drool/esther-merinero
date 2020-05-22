@@ -42,7 +42,7 @@ body {
 
 #loading-text {
     width: 220px;
-    font-size: 3.4rem;
+    font-size: 3rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
@@ -66,7 +66,7 @@ h1 {
     text-align: center;
     word-spacing: 0.5em;
     line-height: 1.6;
-    font-size: 3.4rem;
+    font-size: 3rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
@@ -82,6 +82,12 @@ h1 {
     0%   {transform: translateY(0px)}
     50%  {transform: translateY(-20px)}
     100% {transform: translateY(0px)}
+}
+
+@keyframes margin {
+    0%   {margin-bottom: 200px}
+    50%  {margin-bottom: 220px}
+    100% {margin-bottom: 200px}
 }
 
 @keyframes fade {
@@ -100,7 +106,8 @@ h1 {
 }
 
 .homepageImgs:last-of-type {
-    margin-bottom: 100px;
+    margin-bottom: 200px;
+    /* animation: margin 1s ease-in 3; */
 }
 
 #work-view {

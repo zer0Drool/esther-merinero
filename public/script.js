@@ -71,13 +71,14 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
     // console.log(Object.entries(works));
     console.log(works);
     let worksArr = Object.entries(works);
+    let worksLoadCount = 0;
     for (var i = 0; i < worksArr.length; i++) {
         let title = worksArr[i][0];
         let details = worksArr[i][1];
         let icon = document.createElement('img');
         icon.onload = () => {
-            icons.push(icon);
-            if (icons.length === worksArr.length) {
+            worksLoadCount++;
+            if (worksLoadCount === worksArr.length) {
                 console.log('all loaded bb');
                 dataFetchCount++;
                 if (dataFetchCount === 2) {
@@ -85,6 +86,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
                 };
             };
         };
+        icons.push(icon);
         icon.classList.add('homepageImgs');
         icon.style.left = `${details.x}%`;
         icon.style.top = `${details.y}px`;
@@ -264,7 +266,12 @@ function init() {
         e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
         document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
-            e.target.style.animation = 'bounce 1s linear 2';
+            e.target.style.animation = 'bounce 1s ease-in 3';
+            console.log(e.target.alt);
+            if (e.target.alt === '(------)') {
+                console.log('yeet');
+                e.target.style.animation = 'margin 1s ease-in 3';
+            };
         };
     };
 
