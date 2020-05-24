@@ -172,14 +172,8 @@ h1 {
     /* overflow: hidden; */
 }
 
-.media {
-    /* height: 100%; */
-    /* width: 100% */
-}
-
-iframe {
-    /* height: 100%; */
-    /* width: 85%; */
+video {
+    outline: none;
 }
 
 .double-portrait-wrap {
