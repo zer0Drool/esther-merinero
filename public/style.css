@@ -8,6 +8,11 @@
     src: url('/assets/xbi.otf');
 }
 
+@font-face {
+    font-family: 'por';
+    src: url('/assets/por.ttf');
+}
+
 * {
     margin: 0;
     /* font-family: 'xb', serif; */
@@ -42,7 +47,7 @@ body {
 
 #loading-text {
     width: 220px;
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
@@ -66,7 +71,7 @@ h1 {
     text-align: center;
     word-spacing: 0.5em;
     line-height: 1.6;
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-family: 'xb', serif;
     /* background-color: lime; */
 }
@@ -106,7 +111,7 @@ h1 {
 }
 
 .homepageImgs:last-of-type {
-    margin-bottom: 200px;
+    margin-bottom: 300px;
     /* animation: margin 1s ease-in 3; */
 }
 
@@ -163,6 +168,18 @@ h1 {
     align-items: center;
     justify-content: center;
     margin: 0px 5px 20vh 5px;
+    max-width: 90%;
+    /* overflow: hidden; */
+}
+
+.media {
+    /* height: 100%; */
+    /* width: 100% */
+}
+
+iframe {
+    /* height: 100%; */
+    /* width: 85%; */
 }
 
 .double-portrait-wrap {

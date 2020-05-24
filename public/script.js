@@ -32,7 +32,6 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         // console.log(post);
         let work = post.acf;
         let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
-        console.log(title);
         works[title] = {
             rgb: `${work.r}, ${work.g}, ${work.b}`,
             x: work.x,
@@ -48,11 +47,12 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         };
 
         for (var i = 1; i <= 8; i++) {
-            let url = `${i}_image`;
+            // let url = `${i}_image`;
             let type = `${i}_media_type`;
             let layout = `${i}_media_layout`;
             let description = `${i}_description`;
             let text = `${i}_text`;
+            let url = work[type] === 'image' ? `${i}_image` : `${i}_video`
             if (work[url]) {
                 let mediaObj = {
                     url: work[url],
@@ -69,8 +69,8 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 })
 .then(() => {
     // console.log(Object.entries(works));
-    console.log(works);
     let worksArr = Object.entries(works);
+    console.log(worksArr);
     let worksLoadCount = 0;
     for (var i = 0; i < worksArr.length; i++) {
         let title = worksArr[i][0];
@@ -81,6 +81,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             if (worksLoadCount === worksArr.length) {
                 console.log('all loaded bb');
                 dataFetchCount++;
+                console.log('work loaded', dataFetchCount);
                 if (dataFetchCount === 2) {
                     init();
                 };
@@ -128,6 +129,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
     mail.href = `mailto:${info.mail}?subject=Hey%20Esther!`;
     phone.href = info.phone;
     dataFetchCount++;
+    console.log('info loaded', dataFetchCount);
     if (dataFetchCount === 2) {
         init();
     };
@@ -198,6 +200,12 @@ function init() {
         if (!transitioning) {
             transitioning = true;
             if (workOpen) {
+                let vids = document.getElementsByTagName('iframe');
+                if (vids) {
+                    for (var i = 0; i < vids.length; i++) {
+                        vids[i].src = vids[i].src;
+                    };
+                };
                 work.style.opacity = '0';
                 title.innerText = 'Esther Merinero';
                 document.body.style.overflowY = 'scroll';
@@ -237,8 +245,14 @@ function init() {
     };
 
     function workClose(e) {
-        if ((e.target.id === 'work-view' || e.target.id === 'work-images') && !transitioning) {
+        if ((e.target.id === 'work-view' || e.target.id === 'work-images' || e.target.id === 'extra') && !transitioning) {
             transitioning = true;
+            let vids = document.getElementsByTagName('iframe');
+            if (vids) {
+                for (var i = 0; i < vids.length; i++) {
+                    vids[i].src = vids[i].src;
+                };
+            };
             work.style.opacity = '0';
             title.innerText = 'Esther Merinero';
             document.body.style.overflowY = 'scroll';
@@ -267,9 +281,7 @@ function init() {
         document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
             e.target.style.animation = 'bounce 1s ease-in 3';
-            console.log(e.target.alt);
             if (e.target.alt === '(------)') {
-                console.log('yeet');
                 e.target.style.animation = 'margin 1s ease-in 3';
             };
         };
@@ -295,23 +307,6 @@ function init() {
             document.body.style.overflowY = 'hidden';
             work.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 0.9)`;
 
-            // text
-            // workText.innerHTML = '';
-            // if (works[e.target.alt].description) {
-            //     workText.innerHTML = works[e.target.alt].description;
-            //     // workImages.style.marginTop = '70px';
-            // };
-            // if (!mobile && workText.innerHTML === '') {
-            //     workText.style.marginBottom = '0px';
-            // } else if (!mobile && workText.innerHTML !== '') {
-            //     workText.style.marginBottom = '100px';
-            // };
-            // if (mobile && workText.innerHTML === '') {
-            //     workText.style.marginBottom = '0px';
-            // } else if (mobile && workText.innerHTML !== '') {
-            //     workText.style.marginBottom = '8px';
-            // };
-
             // details
             workDeets.innerHTML = `<p>${works[e.target.alt].materials}</p>
                                    <p>${works[e.target.alt].dimensions}</p>
@@ -321,13 +316,34 @@ function init() {
             mediaElements = [];
             workImages.innerHTML = '';
             let mediaLoadingCount = 0;
+            let loaded = false;
             for (var i = 0; i < works[e.target.alt].media.length; i++) {
                 let div = document.createElement('div');
                 div.classList.add('mediaWrap');
-                let elem = works[e.target.alt].media[i].type === 'image' ? document.createElement('img') : document.createElement('video');
-                elem.onload = () => {
+                let elem;
+                if (works[e.target.alt].media[i].type === 'image') {
+                    elem = document.createElement('img');
+                    elem.onload = () => {
+                        mediaLoadingCount++;
+                        if (mediaLoadingCount === works[e.target.alt].media.length && !loaded) {
+                            loaded = true;
+                            for (var i = 0; i < mediaElements.length; i++) {
+                                workImages.appendChild(mediaElements[i]);
+                                console.log(mediaElements[i]);
+                                if (i === mediaElements.length - 1) {
+                                    mediaLayout(e.target.alt);
+                                };
+                            };
+                        };
+                    };
+                    elem.src = works[e.target.alt].media[i].url;
+                } else {
+                    elem = document.createElement('div');
+                    elem.innerHTML = works[e.target.alt].media[i].url;
+                    console.log('XXXX', elem.innerHTML);
                     mediaLoadingCount++;
-                    if (mediaLoadingCount === works[e.target.alt].media.length) {
+                    if (mediaLoadingCount === works[e.target.alt].media.length && !loaded) {
+                        loaded = true;
                         for (var i = 0; i < mediaElements.length; i++) {
                             workImages.appendChild(mediaElements[i]);
                             console.log(mediaElements[i]);
@@ -337,7 +353,6 @@ function init() {
                         };
                     };
                 };
-                elem.src = works[e.target.alt].media[i].url;
                 elem.classList.add('media');
                 elem.layout = works[e.target.alt].media[i].layout;
                 div.appendChild(elem);
