@@ -338,9 +338,18 @@ function init() {
                     };
                     elem.src = works[e.target.alt].media[i].url;
                 } else {
-                    elem = document.createElement('div');
-                    elem.innerHTML = works[e.target.alt].media[i].url;
-                    console.log('XXXX', elem.innerHTML);
+                    elem = document.createElement('video');
+                    elem.src = works[e.target.alt].media[i].url;
+                    elem.controls = true;
+                    elem.preload = 'auto';
+                    elem.playsinline = true;
+                    console.log('XXXX', elem);
+                    elem.onloadedmetadata = () => {
+                        if (elem.buffered.length === 0) return;
+
+                       var bufferedSeconds = elem.buffered.end(0) - elem.buffered.start(0);
+                       console.log(bufferedSeconds + ' seconds of video are ready to play!');
+                   };
                     mediaLoadingCount++;
                     if (mediaLoadingCount === works[e.target.alt].media.length && !loaded) {
                         loaded = true;
