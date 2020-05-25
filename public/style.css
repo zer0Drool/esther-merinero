@@ -251,7 +251,12 @@ video {
     /* margin-left: 5px; */
     color: black;
     text-decoration: none;
-    animation: glow 5s ease-in infinite;
+    transition: text-shadow 0.5s linear;
+    /* animation: glow 5s ease-in infinite; */
+}
+
+#extra a:hover {
+    text-shadow: 0px 0px 2px black;
 }
 
 #extra a:visited {
