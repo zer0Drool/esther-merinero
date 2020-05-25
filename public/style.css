@@ -85,7 +85,7 @@ h1 {
 
 @keyframes bounce {
     0%   {transform: translateY(0px)}
-    50%  {transform: translateY(-20px)}
+    50%  {transform: translateY(-40px)}
     100% {transform: translateY(0px)}
 }
 
@@ -115,6 +115,10 @@ h1 {
     /* animation: margin 1s ease-in 3; */
 }
 
+#openPer {
+    color: lime;
+}
+
 #work-view {
     display: none;
     flex-direction: column;
@@ -126,7 +130,7 @@ h1 {
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity 0.3s ease-in;
+    transition: opacity 0.6s ease-in;
     overflow-y: scroll;
     background-color: rgba(255, 255, 255, 0.9);
 }

@@ -31,7 +31,8 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 
         // console.log(post);
         let work = post.acf;
-        let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
+        let title = work.name.replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace('(', '<span style="margin-right: 12px;">(</span>').replace(')', '<span style="margin-left: 12px;">)</span>');
+        // let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
         works[title] = {
             rgb: `${work.r}, ${work.g}, ${work.b}`,
             x: work.x,
@@ -186,13 +187,13 @@ function init() {
 
     function titleMouseover() {
         if (workOpen) {
-            title.innerText = 'close';
+            title.innerHTML = 'close';
         };
     };
 
     function titleMouseleave() {
         if (workOpen) {
-            title.innerText = workOpen;
+            title.innerHTML = workOpen;
         };
     };
 
@@ -207,7 +208,7 @@ function init() {
                     };
                 };
                 work.style.opacity = '0';
-                title.innerText = 'Esther Merinero';
+                title.innerHTML = 'Esther Merinero';
                 document.body.style.overflowY = 'scroll';
                 document.body.style.backgroundColor = 'white';
                 if (loadingInt) {
@@ -223,7 +224,7 @@ function init() {
                 }, 400);
             } else if (infoOpen) {
                 info.style.opacity = '0';
-                title.innerText = 'Esther Merinero';
+                title.innerHTML = 'Esther Merinero';
                 document.body.style.overflowY = 'scroll';
                 setTimeout(() => {
                     info.style.display = 'none';
@@ -234,7 +235,7 @@ function init() {
                 document.body.style.overflowY = 'hidden';
                 setTimeout(() => {
                     infoView.style.opacity = '1';
-                    title.innerText = 'close';
+                    title.innerHTML = 'close';
                     infoOpen = true;
                 }, 50);
             };
@@ -254,7 +255,7 @@ function init() {
                 };
             };
             work.style.opacity = '0';
-            title.innerText = 'Esther Merinero';
+            title.innerHTML = 'Esther Merinero';
             document.body.style.overflowY = 'scroll';
             document.body.style.backgroundColor = 'white';
             if (loadingInt) {
@@ -276,18 +277,18 @@ function init() {
         if (!workOpen) {
             title.style.pointerEvents = 'none';
         };
-        title.innerText = e.target.alt;
+        title.innerHTML = e.target.alt;
         e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
         document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
-            e.target.style.animation = 'bounce 1s ease-in infinite';
+            e.target.style.animation = 'bounce 2.5s ease-in-out infinite';
         };
     };
 
     function workMouseleave(e) {
         title.style.pointerEvents = 'auto';
         if (!workOpen) {
-            title.innerText = 'Esther Merinero';
+            title.innerHTML = 'Esther Merinero';
             e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
             document.body.style.backgroundColor = 'white';
         };
@@ -300,7 +301,7 @@ function init() {
         if (!transitioning) {
 
             workOpen = e.target.alt;
-            title.innerText = e.target.alt;
+            title.innerHTML = e.target.alt;
             document.body.style.overflowY = 'hidden';
             work.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 0.9)`;
 
