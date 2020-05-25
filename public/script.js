@@ -124,6 +124,13 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
 })
 .then(() => {
     bio.innerHTML = info.bio;
+
+    for (var i = 0; i < bio.children.length; i++) {
+        if (!bio.children[i].style.paddingLeft) {
+            bio.children[i].style.paddingRight = '80px';
+        };
+    };
+
     cv.href = info.cv;
     cv.style.paddingLeft = bio.lastElementChild.style.paddingLeft;
     cornerImg.src = info.image;
