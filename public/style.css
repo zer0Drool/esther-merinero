@@ -218,6 +218,7 @@ video {
 
 .media-text {
     display: block;
+    width: 500px;
     margin-bottom: 20vh;
     font-family: 'xb', serif;
 }
@@ -288,6 +289,7 @@ video {
 
 #icons {
     position: relative;
+    width: 500px;
 }
 
 #icons p, #icons a {

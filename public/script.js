@@ -411,7 +411,18 @@ function init() {
     function mediaLayout(target) {
         let portraitCount = 0;
         setTimeout(() => {
-            let media = document.getElementsByClassName('media');
+            let medText = document.getElementsByClassName('media-text');
+            console.log(medText);
+            for (var i = 0; i < medText.length; i++) {
+                console.log(medText[i].children)
+                for (var j = 0; j < medText[i].children.length; j++) {
+                    console.log(medText[i].children[j].style.paddingLeft);
+                    if (!medText[i].children[j].style.paddingLeft) {
+                        medText[i].children[j].style.paddingRight = '80px';
+                    };
+                };
+            };
+
             if (extra.innerText === '') {
                 console.log(extra);
                 extra.style.marginBottom = '0vh';
@@ -427,6 +438,7 @@ function init() {
                 extra.style.marginBottom = '30vh';
             };
 
+            let media = document.getElementsByClassName('media');
             for (let i = 0; i < media.length; i++) {
                 if (works[target].media[i].layout === 'horizontal-single') {
                     media[i].parentElement.style.height = mobile ? '90%' : '80vh';
