@@ -423,6 +423,8 @@ function init() {
                         x.children[i].style.marginBottom = '10vh';
                     };
                 };
+            } else {
+                extra.style.marginBottom = '30vh';
             };
 
             for (let i = 0; i < media.length; i++) {
