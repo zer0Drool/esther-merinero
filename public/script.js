@@ -412,11 +412,8 @@ function init() {
         let portraitCount = 0;
         setTimeout(() => {
             let medText = document.getElementsByClassName('media-text');
-            console.log(medText);
             for (var i = 0; i < medText.length; i++) {
-                console.log(medText[i].children)
                 for (var j = 0; j < medText[i].children.length; j++) {
-                    console.log(medText[i].children[j].style.paddingLeft);
                     if (!medText[i].children[j].style.paddingLeft) {
                         medText[i].children[j].style.paddingRight = '80px';
                     };
