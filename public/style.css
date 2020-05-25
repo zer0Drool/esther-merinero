@@ -182,6 +182,7 @@ video {
 
 .mediaWrap img, .mediaWrap video {
     height: 100%;
+    max-width: 100%;
     padding: 0px 5px;
     /* cursor: zoom-in; */
     /* filter: drop-shadow(3px 3px 10px black); */

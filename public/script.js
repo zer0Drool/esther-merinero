@@ -81,7 +81,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             if (worksLoadCount === worksArr.length) {
                 console.log('all loaded bb');
                 dataFetchCount++;
-                console.log('work loaded', dataFetchCount);
+                // console.log('work loaded', dataFetchCount);
                 if (dataFetchCount === 2) {
                     init();
                 };
@@ -129,7 +129,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
     mail.href = `mailto:${info.mail}?subject=Hey%20Esther!`;
     phone.href = info.phone;
     dataFetchCount++;
-    console.log('info loaded', dataFetchCount);
+    // console.log('info loaded', dataFetchCount);
     if (dataFetchCount === 2) {
         init();
     };
@@ -176,7 +176,6 @@ function init() {
     function random(max, min) {
         let random = Math.floor(Math.random() * (max - min + 1)) + min;
         if (random !== prevRandom) {
-            console.log(random);
             prevRandom = random;
             return random;
         } else {
@@ -338,29 +337,21 @@ function init() {
                     };
                     elem.src = works[e.target.alt].media[i].url;
                 } else {
+                    console.log('video', i);
                     elem = document.createElement('video');
                     elem.src = works[e.target.alt].media[i].url;
                     elem.controls = true;
                     elem.preload = 'auto';
                     elem.playsinline = true;
-                    console.log('XXXX', elem);
-                    elem.onloadedmetadata = () => {
-                        if (elem.buffered.length === 0) return;
-
-                       var bufferedSeconds = elem.buffered.end(0) - elem.buffered.start(0);
-                       console.log(bufferedSeconds + ' seconds of video are ready to play!');
-                   };
+                   //  elem.onloadedmetadata = () => {
+                   //      if (elem.buffered.length === 0) return;
+                   //
+                   //     var bufferedSeconds = elem.buffered.end(0) - elem.buffered.start(0);
+                   //     console.log(bufferedSeconds + ' seconds of video are ready to play!');
+                   // };
                     mediaLoadingCount++;
-                    if (mediaLoadingCount === works[e.target.alt].media.length && !loaded) {
-                        loaded = true;
-                        for (var i = 0; i < mediaElements.length; i++) {
-                            workImages.appendChild(mediaElements[i]);
-                            console.log(mediaElements[i]);
-                            if (i === mediaElements.length - 1) {
-                                mediaLayout(e.target.alt);
-                            };
-                        };
-                    };
+                    console.log(mediaLoadingCount);
+
                 };
                 elem.classList.add('media');
                 elem.layout = works[e.target.alt].media[i].layout;
@@ -385,6 +376,17 @@ function init() {
                     mediaElements.push(text);
                 };
 
+                if (mediaLoadingCount === works[e.target.alt].media.length && !loaded) {
+                    loaded = true;
+                    for (var i = 0; i < mediaElements.length; i++) {
+                        workImages.appendChild(mediaElements[i]);
+                        console.log('media elements', mediaElements[i]);
+                        if (i === mediaElements.length - 1) {
+                            mediaLayout(e.target.alt);
+                        };
+                    };
+                };
+
             };
 
             // extra info
@@ -399,7 +401,6 @@ function init() {
             // loading if necessary
             setTimeout(() => {
                 if (workViewInner.style.display !== 'block') {
-                    console.log(workViewInner.style.display);
                     loadingWrap.style.display = 'flex';
                     loadingInt = setInterval(loading, 250);
                 };
