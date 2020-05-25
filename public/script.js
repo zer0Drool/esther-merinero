@@ -279,10 +279,7 @@ function init() {
         e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
         document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
-            e.target.style.animation = 'bounce 1s ease-in 3';
-            if (e.target.alt === '(------)') {
-                e.target.style.animation = 'margin 1s ease-in 3';
-            };
+            e.target.style.animation = 'bounce 1s ease-in infinite';
         };
     };
 
