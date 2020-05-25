@@ -390,9 +390,9 @@ function init() {
 
             // extra info
             extra.innerHTML = works[e.target.alt].extra.indexOf('<p>') === -1 ? `<p>${works[e.target.alt].extra}</p>` : `${works[e.target.alt].extra}`;
-            e.target.style.filter = mobile ? 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
 
             // show
+            e.target.style.filter = mobile ? 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
             work.style.display = 'block' ;
             work.scrollTop = 0;
             work.style.opacity = '1';
@@ -412,7 +412,18 @@ function init() {
         let portraitCount = 0;
         setTimeout(() => {
             let media = document.getElementsByClassName('media');
-            console.log(media);
+            if (extra.innerText === '') {
+                console.log(extra);
+                extra.style.marginBottom = '0vh';
+                let x = extra.previousElementSibling.lastElementChild;
+                if (x.classList.contains('mediaWrap')) {
+                    x.style.marginBottom = '10vh';
+                } else if (x.classList.contains('double-portrait-wrap')) {
+                    for (var i = 0; i < x.children.length - 1; i++) {
+                        x.children[i].style.marginBottom = '10vh';
+                    };
+                };
+            };
 
             for (let i = 0; i < media.length; i++) {
                 if (works[target].media[i].layout === 'horizontal-single') {

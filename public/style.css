@@ -198,11 +198,19 @@ video {
     font-family: 'xb', serif;
 }
 
+.media-description p {
+    font-size: 1rem;
+}
+
 .media-text {
     display: block;
     margin-bottom: 20vh;
     font-family: 'xb', serif;
 }
+
+/* .media-description p {
+    font-size: 1rem;
+} */
 
 #extra {
     display: flex;
