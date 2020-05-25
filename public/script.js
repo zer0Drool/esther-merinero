@@ -16,7 +16,7 @@ function loading() {
     loadingCount = loadingCount < loadingArr.length - 1 ? loadingCount + 1 : 0;
 };
 
-loadingInt = setInterval(loading, 250);
+// loadingInt = setInterval(loading, 250);
 
 // get work data
 let dataFetchCount = 0;
@@ -124,6 +124,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
 .then(() => {
     bio.innerHTML = info.bio;
     cv.href = info.cv;
+    cv.style.paddingLeft = bio.lastElementChild.style.paddingLeft;
     cornerImg.src = info.image;
     insta.href = info.insta;
     mail.href = `mailto:${info.mail}?subject=Hey%20Esther!`;
@@ -140,10 +141,10 @@ function init() {
 
     console.log('lets go');
 
-    clearInterval(loadingInt);
-    loadingCount = 0;
-    loadingText.innerText = 'loading';
-    loadingWrap.style.display = 'none';
+    // clearInterval(loadingInt);
+    // loadingCount = 0;
+    // loadingText.innerText = 'loading';
+    // loadingWrap.style.display = 'none';
 
     let homepageWrap = document.getElementById('homepage-wrap');
     for (var i = 0; i < icons.length; i++) {
