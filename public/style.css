@@ -249,7 +249,7 @@ video {
 #cornerImg {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 35px;
     width: 180px;
     filter: drop-shadow(2px 2px 8px rgb(0, 0, 0));
 }
