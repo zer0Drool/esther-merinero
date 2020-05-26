@@ -350,10 +350,19 @@ video {
 }
 
 
+@media screen and (max-width: 1350px) {
 
-@media screen and (max-width: 900px) {
+    .double-portrait-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-    body {
+}
+
+@media screen and (max-width: 1000px) {
+
+    #homepage-wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -361,18 +370,18 @@ video {
 
     .homepageImgs {
         position: initial;
-        margin-bottom: 100px;
+        margin-bottom: 150px;
     }
 
 }
 
-@media screen and (max-width: 1503px) {
+/* @media screen and (max-width: 1503px) {
 
     #extra {
         margin-bottom: 45vh;
     }
 
-}
+} */
 
 @media (hover: none) and (pointer: coarse) {
 
