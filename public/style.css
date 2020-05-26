@@ -82,6 +82,7 @@ h1 {
     height: 100%;
     opacity: 0;
     transition: opacity 0.5s ease-in;
+    padding-bottom: 500px;
 }
 
 @keyframes bounce {
@@ -421,30 +422,26 @@ video {
         margin-right: 0px;
     }
 
-    #work-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        /* margin-bottom: 8px; */
-        width: 100%;
-    }
-
-    #first-work-image {
-        position: relative;
-    }
-
     #work-images {
         position: relative;
-        margin-top: 0px;
+        /* margin-top: 0px; */
     }
 
-    #work-images div, #first-work-image div {
+    .mediaWrap {
         margin-bottom: 8px;
     }
 
-    #work-images div img, #first-work-image div img {
+    .media-text {
+        margin-bottom: 15px;
+    }
+
+    .mediaWrap img {
+        height: auto;
         padding: 0px;
+    }
+
+    .media-description, .media-text {
+        width: 90%;
     }
 
     #extra {

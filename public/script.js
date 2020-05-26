@@ -444,25 +444,30 @@ function init() {
 
             let media = document.getElementsByClassName('media');
             for (let i = 0; i < media.length; i++) {
-                if (works[target].media[i].layout === 'horizontal-single') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
-                    // media[i].parentElement.style.width = mobile ? '90%' : '60%';
-                    // media[i].parentElement.style.display = 'block';
+                if (works[target].media[i].layout === 'horizontal-single' || works[target].media[i].layout === 'vertical-single') {
+                    if (mobile) {
+                        media[i].parentElement.style.width = '90%';
+                    } else {
+                        media[i].parentElement.style.height = '80vh';
+                    };
                 } else if (works[target].media[i].layout === 'horizontal-small') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '20vh';
-                    // media[i].parentElement.style.width = mobile ? '90%' : '20%';
-                    // media[i].parentElement.style.display = 'block';
-                } else if (works[target].media[i].layout === 'vertical-single') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
-                    // media[i].parentElement.style.width = mobile ? '90%' : '30%';
-                    // media[i].parentElement.style.display = 'block';
+                    if (mobile) {
+                        media[i].parentElement.style.width = '30%';
+                    } else {
+                        media[i].parentElement.style.height = '20vh';
+                    };
                 } else if (works[target].media[i].layout === 'vertical-small') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '30vh';
-                    // media[i].parentElement.style.width = mobile ? '90%' : '15%';
-                    // media[i].parentElement.style.display = 'block';
+                    if (mobile) {
+                        media[i].parentElement.style.width = '40%';
+                    } else {
+                        media[i].parentElement.style.height = '30vh';
+                    };
                 } else if (works[target].media[i].layout === 'vertical-double') {
-                    media[i].parentElement.style.height = mobile ? '90%' : '80vh';
-                    // media[i].parentElement.style.width = mobile ? '90%' : '30%';
+                    if (mobile) {
+                        media[i].parentElement.style.width = '90%';
+                    } else {
+                        media[i].parentElement.style.height = '80vh';
+                    };
                     media[i].parentElement.style.display = 'inline-block';
                     portraitCount++;
                 };
