@@ -59,7 +59,7 @@ body {
     position: fixed;
     z-index: 3;
     width: 100%;
-    bottom: 8vh;
+    bottom: 7.1vh;
     pointer-events: none;
 }
 
@@ -71,7 +71,7 @@ h1 {
     text-align: center;
     word-spacing: 0.5em;
     line-height: 1.6;
-    font-size: 3.4rem;
+    font-size: 6.5vmin;
     font-family: 'xb', serif;
     animation: fade 0.5s ease-in 1;
     /* background-color: lime; */
@@ -169,7 +169,7 @@ h1 {
 
 #work-deets p {
     font-family: 'xb', serif;
-    font-size: 1rem;
+    font-size: 2vmin;
     line-height: 1.2;
     margin-right: 30px;
 }
@@ -214,14 +214,18 @@ video {
 }
 
 .media-description p {
-    font-size: 1rem;
+    font-size: 2vmin;
 }
 
 .media-text {
     display: block;
-    width: 500px;
+    width: 37%;
     margin-bottom: 20vh;
     font-family: 'xb', serif;
+}
+
+.media-text p span em {
+    font-size: 2.3vmin;
 }
 
 /* .media-description p {
@@ -238,7 +242,7 @@ video {
 #extra p {
     /* font-family: 'xbi'; */
     text-align: center;
-    font-size: 1rem;
+    font-size: 2vmin;
 }
 
 @keyframes clickMe {
@@ -283,14 +287,14 @@ video {
 #cornerImg {
     position: absolute;
     top: 0;
-    right: 35px;
+    right: 27px;
     width: 180px;
     filter: drop-shadow(2px 2px 8px rgb(0, 0, 0));
 }
 
 #icons {
     position: relative;
-    width: 500px;
+    width: 37%;
 }
 
 #icons p, #icons a {
@@ -334,6 +338,11 @@ video {
 #cv {
     /* position: relative; */
     font-size: 1.2rem;
+    transition: text-shadow 0.5s linear;
+}
+
+#cv:hover {
+    text-shadow: 0px 0px 2px black;
 }
 
 #credits {
@@ -394,6 +403,10 @@ video {
         font-size: 2.2rem;
     }
 
+    #homepage-wrap {
+        padding-bottom: 20vh;
+    }
+
     .homepageImgs {
         max-width: 95%;
         filter: drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1);
@@ -404,7 +417,7 @@ video {
     }
 
     .homepageImgs:last-of-type {
-        margin-bottom: 150px;
+        /* margin-bottom: 20vh; */
     }
 
     #work-view {
