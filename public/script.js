@@ -227,13 +227,14 @@ function init() {
                 //     workOpen = false;
                 // }, 400);
             } else if (infoOpen) {
-                info.style.opacity = '0';
-                title.innerHTML = 'Esther Merinero';
-                document.body.style.overflowY = 'scroll';
-                setTimeout(() => {
-                    info.style.display = 'none';
-                    infoOpen = false;
-                }, 400);
+                return;
+                // info.style.opacity = '0';
+                // title.innerHTML = 'Esther Merinero';
+                // document.body.style.overflowY = 'scroll';
+                // setTimeout(() => {
+                //     info.style.display = 'none';
+                //     infoOpen = false;
+                // }, 400);
             } else {
                 infoView.style.display = mobile ? 'block' : 'flex';
                 document.body.style.overflowY = 'hidden';
@@ -249,13 +250,29 @@ function init() {
         };
     };
 
+    function infoClose(e) {
+        if (!e.target.classList.contains('contactIcon')) {
+            transitioning = true;
+            info.style.opacity = '0';
+            title.innerHTML = 'Esther Merinero';
+            document.body.style.overflowY = 'scroll';
+            setTimeout(() => {
+                info.style.display = 'none';
+                infoOpen = false;
+                transitioning = false;
+            }, 400);
+        };
+    };
+
     function workClose(e) {
         if ((e.target.id === 'work-view' || e.target.id === 'work-images' || e.target.id === 'extra') && !transitioning) {
             transitioning = true;
-            let vids = document.getElementsByTagName('iframe');
+            let vids = document.getElementsByTagName('video');
             if (vids) {
                 for (var i = 0; i < vids.length; i++) {
-                    vids[i].src = vids[i].src;
+                    if (!vids[i].paused) {
+                        vids[i].pause();
+                    };
                 };
             };
             work.style.opacity = '0';
@@ -402,12 +419,12 @@ function init() {
             work.style.opacity = '1';
 
             // loading if necessary
-            setTimeout(() => {
-                if (workViewInner.style.display !== 'block') {
-                    loadingWrap.style.display = 'flex';
-                    loadingInt = setInterval(loading, 250);
-                };
-            }, 1000);
+            // setTimeout(() => {
+            //     if (workViewInner.style.display !== 'block') {
+            //         loadingWrap.style.display = 'flex';
+            //         loadingInt = setInterval(loading, 250);
+            //     };
+            // }, 1000);
 
         };
     };
@@ -494,6 +511,7 @@ function init() {
     // event listeners
     title.addEventListener('click', titleClick);
     work.addEventListener('click', (e) => workClose(e));
+    info.addEventListener('click', (e) => infoClose(e));
     for (var i = 0; i < imgs.length; i++) {
         imgs[i].addEventListener('mouseover', (e) => workMouseover(e));
         imgs[i].addEventListener('mouseleave', (e) => workMouseleave(e));
