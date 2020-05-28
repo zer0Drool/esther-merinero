@@ -29,7 +29,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
 .then(res => {
     res.data.map(post => {
 
-        // console.log(post);
+        console.log(post);
         let work = post.acf;
         let title = work.name.replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace('(', '<span style="margin-right: 12px;">(</span>').replace(')', '<span style="margin-left: 12px;">)</span>');
         // let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
@@ -41,7 +41,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             // description: work.description,
             dimensions: work.dimensions,
             materials: work.materials,
-            extra: work.extra_x,
+            extra: work.extra_x.replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>'),
             year: work.year,
             icon: work.icon,
             media: []
@@ -53,7 +53,12 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             let layout = `${i}_media_layout`;
             let description = `${i}_description`;
             let text = `${i}_text`;
-            let url = work[type] === 'image' ? `${i}_image` : `${i}_video`
+            let url = work[type] === 'image' ? `${i}_image` : `${i}_video`;
+            work[description] = work[description] ? work[description].replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>') : work[description];
+            work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>') : work[text];
+
+            console.log(work[text]);
+            // console.log(work[text]);
             if (work[url]) {
                 let mediaObj = {
                     url: work[url],
@@ -92,7 +97,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         icon.classList.add('homepageImgs');
         icon.style.left = `${details.x}%`;
         icon.style.top = `${details.y}px`;
-        icon.style.width = `${details.width}px`;
+        icon.style.width = `${details.width}vw`;
         icon.alt = title;
         icon.src = details.icon;
     }
@@ -441,6 +446,10 @@ function init() {
                         medText[i].children[j].style.paddingRight = '20%';
                     };
                 };
+            };
+            let italics = document.getElementsByClassName('italic-text');
+            for (var i = 0; i < italics.length; i++) {
+                italics[i].style.fontFamily = `${italics[i].parentNode.style.fontFamily}i`
             };
 
             if (extra.innerText === '') {

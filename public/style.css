@@ -13,6 +13,16 @@
     src: url('/assets/por.ttf');
 }
 
+@font-face {
+    font-family: 'context';
+    src: url('/assets/context.ttf');
+}
+
+@font-face {
+    font-family: 'contexti';
+    src: url('/assets/contexti.ttf');
+}
+
 * {
     margin: 0;
     /* font-family: 'xb', serif; */
@@ -133,6 +143,10 @@ h1 {
 
 #openPer {
     color: lime;
+}
+
+.italic {
+    font-family: 'xbi';
 }
 
 #work-view {
