@@ -97,7 +97,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         icon.classList.add('homepageImgs');
         icon.style.left = `${details.x}%`;
         icon.style.top = `${details.y}px`;
-        icon.style.width = `${details.width}vw`;
+        icon.style.width = `${details.width}vmin`;
         icon.alt = title;
         icon.src = details.icon;
     }
