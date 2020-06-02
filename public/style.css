@@ -23,6 +23,22 @@
     src: url('/assets/contexti.ttf');
 }
 
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-weight: 400;
+}
+
+/**
+* Firefox specific rule
+*/
+@-moz-document url-prefix() {
+    body {
+        font-weight: lighter !important;
+    }
+}
+
 * {
     margin: 0;
     /* font-family: 'xb', serif; */
@@ -69,8 +85,14 @@ body {
     position: fixed;
     z-index: 3;
     width: 100%;
-    bottom: 7.1vh;
+    bottom: 6.7vh;
     pointer-events: none;
+}
+
+@keyframes loadFlash {
+    0%   {opacity: 1}
+    50%  {opacity: 0}
+    100% {opacity: 1}
 }
 
 h1 {
@@ -79,11 +101,12 @@ h1 {
     cursor: pointer;
     pointer-events: auto;
     text-align: center;
-    word-spacing: 0.5em;
+    word-spacing: 4vmin;
     line-height: 1.6;
     font-size: 6.5vmin;
     font-family: 'xb', serif;
-    animation: fade 0.5s ease-in 1;
+    animation: loadFlash 3s ease-in-out infinite;
+    /* animation: fade 0.5s ease-in 1; */
     /* background-color: lime; */
 }
 
@@ -311,11 +334,6 @@ video {
     width: 37%;
 }
 
-#icons p, #icons a {
-    font-family: 'xb', serif;
-    font-size: 1.2rem;
-}
-
 #icons a:visited, #credits a:visited {
     color: black;
 }
@@ -351,7 +369,8 @@ video {
 
 #cv {
     /* position: relative; */
-    font-size: 1.2rem;
+    font-family: 'xb';
+    font-size: 2.3vmin;
     transition: text-shadow 0.5s linear;
 }
 

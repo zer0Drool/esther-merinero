@@ -16,6 +16,8 @@ function loading() {
     loadingCount = loadingCount < loadingArr.length - 1 ? loadingCount + 1 : 0;
 };
 
+let title = document.getElementsByTagName('h1')[0];
+
 // loadingInt = setInterval(loading, 250);
 
 // get work data
@@ -100,7 +102,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         icon.style.width = `${details.width}vmin`;
         icon.alt = title;
         icon.src = details.icon;
-    }
+    };
 })
 .catch(err => console.log('error fetching works >>> ', err));
 
@@ -156,6 +158,8 @@ function init() {
 
     console.log('lets go');
 
+    title.style.animation = 'none';
+
     // clearInterval(loadingInt);
     // loadingCount = 0;
     // loadingText.innerText = 'loading';
@@ -170,7 +174,6 @@ function init() {
     };
 
     // vars
-    let title = document.getElementsByTagName('h1')[0];
     let imgs = document.getElementsByClassName('homepageImgs');
     let contactIcons = document.getElementsByClassName('contactIcon');
     let info = document.getElementById('info');
@@ -214,32 +217,9 @@ function init() {
     function titleClick() {
         if (!transitioning) {
             transitioning = true;
-            if (workOpen) {
+            if (workOpen || infoOpen) {
+                transitioning = false;
                 return;
-                // work.style.opacity = '0';
-                // title.innerHTML = 'Esther Merinero';
-                // document.body.style.overflowY = 'scroll';
-                // document.body.style.backgroundColor = 'white';
-                // if (loadingInt) {
-                //     loadingWrap.style.display = 'none';
-                //     clearInterval(loadingInt);
-                //     loadingCount = 0;
-                //     loadingText.innerText = 'loading';
-                // };
-                // setTimeout(() => {
-                //     work.style.display = 'none';
-                //     workViewInner.style.display = 'none';
-                //     workOpen = false;
-                // }, 400);
-            } else if (infoOpen) {
-                return;
-                // info.style.opacity = '0';
-                // title.innerHTML = 'Esther Merinero';
-                // document.body.style.overflowY = 'scroll';
-                // setTimeout(() => {
-                //     info.style.display = 'none';
-                //     infoOpen = false;
-                // }, 400);
             } else {
                 infoView.style.display = mobile ? 'block' : 'flex';
                 document.body.style.overflowY = 'hidden';
@@ -325,6 +305,10 @@ function init() {
 
     function workClick(e) {
         if (!transitioning) {
+
+            setTimeout(() => {
+                title.style.animation = 'loadFlash 3s ease-in-out infinite';
+            }, 1000);
 
             workOpen = e.target.alt;
             title.innerHTML = e.target.alt;
@@ -507,10 +491,11 @@ function init() {
                 };
 
                 if (i === media.length -1) {
-                    loadingWrap.style.display = 'none';
-                    clearInterval(loadingInt);
-                    loadingCount = 0;
-                    loadingText.innerText = 'loading';
+                    // loadingWrap.style.display = 'none';
+                    // clearInterval(loadingInt);
+                    // loadingCount = 0;
+                    // loadingText.innerText = 'loading';
+                    title.style.animation = 'none';
                     workViewInner.style.display = 'block';
                 };
             };
