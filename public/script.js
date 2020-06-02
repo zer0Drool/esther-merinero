@@ -306,8 +306,11 @@ function init() {
     function workClick(e) {
         if (!transitioning) {
 
+            let loaded = false;
             setTimeout(() => {
-                title.style.animation = 'loadFlash 3s ease-in-out infinite';
+                if (!loaded) {
+                    title.style.animation = 'loadFlash 3s ease-in-out infinite';
+                };
             }, 1000);
 
             workOpen = e.target.alt;
@@ -324,7 +327,6 @@ function init() {
             mediaElements = [];
             workImages.innerHTML = '';
             let mediaLoadingCount = 0;
-            let loaded = false;
             for (var i = 0; i < works[e.target.alt].media.length; i++) {
                 let div = document.createElement('div');
                 div.classList.add('mediaWrap');
