@@ -155,6 +155,8 @@ h1 {
     cursor: pointer;
     filter: drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0);
     transition: filter 0.3s ease-in;
+    user-select: none;
+    outline: none;
     /* animation: fade 0.5s ease-out 1; */
     /* transition: transform 0.3s ease-in-out; */
 }
@@ -442,7 +444,7 @@ video {
 
     .homepageImgs {
         max-width: 95%;
-        filter: drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1);
+        filter: drop-shadow(0px 0px 0px rgb(0, 0, 0)) brightness(1);
     }
 
     .homepageImgs:first-of-type {

@@ -101,7 +101,7 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         icon.classList.add('homepageImgs');
         icon.style.left = `${details.x}%`;
         icon.style.top = `${details.y}px`;
-        icon.style.width = `${details.width}vmin`;
+        icon.style.width = mobile ? `${parseInt(details.width) + 12}vh` : `${details.width}vh`;
         icon.alt = title;
         icon.src = details.icon;
     };
@@ -263,7 +263,11 @@ function init() {
                 };
             };
             work.style.opacity = '0';
-            title.innerHTML = 'Esther Merinero';
+            if (mobile) {
+                title.parentNode.style.display = 'flex';
+            } else {
+                title.innerHTML = 'Esther Merinero';
+            };
             document.body.style.overflowY = 'scroll';
             document.body.style.backgroundColor = 'white';
             if (loadingInt) {
@@ -282,25 +286,25 @@ function init() {
     };
 
     function workMouseover(e) {
-        if (!workOpen) {
-            title.style.pointerEvents = 'none';
-        };
-        title.innerHTML = e.target.alt;
-        e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
-        document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
         if (!mobile) {
+            if (!workOpen) {
+                title.style.pointerEvents = 'none';
+            };
+            title.innerHTML = e.target.alt;
+            e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)';
+            document.body.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 1)`;
             e.target.style.animation = 'bounce 2.5s ease-in-out infinite';
         };
     };
 
     function workMouseleave(e) {
-        title.style.pointerEvents = 'auto';
-        if (!workOpen) {
-            title.innerHTML = 'Esther Merinero';
-            e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
-            document.body.style.backgroundColor = 'white';
-        };
         if (!mobile) {
+            title.style.pointerEvents = 'auto';
+            if (!workOpen) {
+                title.innerHTML = 'Esther Merinero';
+                e.target.style.filter = 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
+                document.body.style.backgroundColor = 'white';
+            };
             e.target.style.animation = '';
         };
     };
@@ -316,12 +320,17 @@ function init() {
             }, 1000);
 
             workOpen = e.target.alt;
-            title.innerHTML = e.target.alt;
+            if (mobile) {
+                title.parentNode.style.display = 'none';
+            } else {
+                title.innerHTML = e.target.alt;
+            };
             document.body.style.overflowY = 'hidden';
             work.style.backgroundColor = `rgba(${works[e.target.alt].rgb}, 0.9)`;
 
             // details
-            workDeets.innerHTML = `<p>${works[e.target.alt].materials}</p>
+            workDeets.innerHTML = `${mobile ? e.target.alt : ''}
+                                   <p>${works[e.target.alt].materials}</p>
                                    <p>${works[e.target.alt].dimensions}</p>
                                    <p>${works[e.target.alt].year}</p>`;
 
@@ -387,10 +396,10 @@ function init() {
                     text.classList.add('media-text');
                     text.innerHTML = works[e.target.alt].media[i].text;
                     if (works[e.target.alt].media[i].outline) {
-                        text.style.webkitTextStroke = '0.2px black';
+                        text.style.webkitTextStroke = '0.03vmin black';
                     };
                     if (works[e.target.alt].media[i].shadow) {
-                        text.style.textShadow = '0px 0px 4px black';
+                        text.style.textShadow = '0vmin 0vmin 0.5vmin black';
                     };
                     mediaElements.push(text);
                 };
@@ -412,7 +421,7 @@ function init() {
             extra.innerHTML = works[e.target.alt].extra.indexOf('<p>') === -1 ? `<p>${works[e.target.alt].extra}</p>` : `${works[e.target.alt].extra}`;
 
             // show
-            e.target.style.filter = mobile ? 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
+            e.target.style.filter = mobile ? 'drop-shadow(0px 0px 0px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
             work.style.display = 'block' ;
             work.scrollTop = 0;
             work.style.opacity = '1';
