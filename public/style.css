@@ -467,12 +467,13 @@ video {
     }
 
     #work-deets p {
+        font-size: 4.5vmin;
         margin-right: 0px;
     }
 
     #work-images {
         position: relative;
-        /* margin-top: 0px; */
+        margin-top: 20vh;
     }
 
     .mediaWrap {
@@ -492,12 +493,22 @@ video {
         width: 90%;
     }
 
+    .media-description p {
+        font-size: 4.5vmin;
+        text-align: center;
+    }
+
     #extra {
         margin-bottom: 200px;
     }
 
-    #extra p, #work-text p {
+    #work-text p {
         max-width: 90%;
+    }
+
+    #extra p {
+        max-width: 90%;
+        font-size: 4.5vmin;
     }
 
     #info {
