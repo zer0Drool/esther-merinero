@@ -55,19 +55,21 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             let layout = `${i}_media_layout`;
             let description = `${i}_description`;
             let text = `${i}_text`;
+            let outline = `${i}_text_outline`;
+            let shadow = `${i}_text_shadow`;
             let url = work[type] === 'image' ? `${i}_image` : `${i}_video`;
             work[description] = work[description] ? work[description].replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>') : work[description];
             work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>') : work[text];
 
-            console.log(work[text]);
-            // console.log(work[text]);
             if (work[url]) {
                 let mediaObj = {
                     url: work[url],
                     type: work[type],
                     layout: work[layout],
                     description: work[description],
-                    text: work[text]
+                    text: work[text],
+                    outline: work[outline],
+                    shadow: work[shadow]
                 };
                 works[title].media.push(mediaObj);
             };
@@ -384,6 +386,12 @@ function init() {
                     let text = document.createElement('div');
                     text.classList.add('media-text');
                     text.innerHTML = works[e.target.alt].media[i].text;
+                    if (works[e.target.alt].media[i].outline) {
+                        text.style.webkitTextStroke = '0.2px black';
+                    };
+                    if (works[e.target.alt].media[i].shadow) {
+                        text.style.textShadow = '0px 0px 4px black';
+                    };
                     mediaElements.push(text);
                 };
 
