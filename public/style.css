@@ -106,6 +106,7 @@ h1 {
     font-size: 6.5vmin;
     font-family: 'xb', serif;
     animation: loadFlash 3s ease-in-out infinite;
+    user-select: none;
     /* animation: fade 0.5s ease-in 1; */
     /* background-color: lime; */
 }
@@ -432,10 +433,13 @@ video {
 
     #title-wrap {
         bottom: 10vh;
+        user-select: none;
+        pointer-events: none;
     }
 
     h1 {
         font-size: 2.2rem;
+        user-select: none;
     }
 
     #homepage-wrap {
