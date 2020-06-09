@@ -478,6 +478,14 @@ function init() {
                 extra.style.marginBottom = mobile ? '20vh' : '30vh';
             };
 
+            let vids = document.getElementsByTagName('video');
+            if (vids.length) {
+                for (var i = 0; i < vids.length; i++) {
+                    vids[i].play();
+                    vids[i].pause();
+                };
+            };
+
             let media = document.getElementsByClassName('media');
             for (let i = 0; i < media.length; i++) {
                 if (works[target].media[i].layout === 'horizontal-single' || works[target].media[i].layout === 'vertical-single') {
