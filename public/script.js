@@ -394,6 +394,11 @@ function init() {
                 if (works[e.target.alt].media[i].text) {
                     let text = document.createElement('div');
                     text.classList.add('media-text');
+                    // if (mobile) {
+                    //     console.log('change text size');
+                    //     works[e.target.alt].media[i].text.replace(new RegExp('2.3vmin', 'g'), '4.5vmin');
+                    //     console.log(works[e.target.alt].media[i].text);
+                    // };
                     text.innerHTML = works[e.target.alt].media[i].text;
                     if (works[e.target.alt].media[i].outline) {
                         text.style.webkitTextStroke = '0.03vmin black';
@@ -448,6 +453,9 @@ function init() {
                     } else {
                         medText[i].children[j].style.paddingRight = '20%';
                     };
+                    // if (mobile) {
+                    //     medText[i].children[j].children[0].style.fontSize = '4.5vmin';
+                    // };
                 };
             };
             let italics = document.getElementsByClassName('italic-text');
