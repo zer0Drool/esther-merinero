@@ -533,6 +533,14 @@ video {
         margin: 0 auto;
     }
 
+    #bio span {
+        font-size: 4.5vmin !important;
+    }
+
+    #cv {
+        font-size: 4.5vmin;
+    }
+
     .contactIconOuter {
         display: inline-block;
         position: initial;
@@ -554,7 +562,7 @@ video {
 
     #credits {
         position: relative;
-        margin-top: 100px;
+        margin-top: 150px;
         margin-left: 5%;
         margin-bottom: 10px;
         font-size: 10px;
