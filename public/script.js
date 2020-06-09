@@ -216,18 +216,22 @@ function init() {
         };
     };
 
-    function titleClick() {
+    function titleClick(e) {
         if (!transitioning) {
             transitioning = true;
-            if (workOpen || infoOpen) {
-                transitioning = false;
+            if (workOpen && mobile) {
+                console.log('work close');
+                workClose(e);
+                return;
+            } else if (infoOpen && mobile) {
+                infoClose(e);
                 return;
             } else {
                 infoView.style.display = mobile ? 'block' : 'flex';
                 document.body.style.overflowY = 'hidden';
                 setTimeout(() => {
                     infoView.style.opacity = '1';
-                    title.innerHTML = 'Esther Merinero';
+                    title.innerHTML = mobile ? 'close' : 'Esther Merinero';
                     infoOpen = true;
                 }, 50);
             };
@@ -252,7 +256,7 @@ function init() {
     };
 
     function workClose(e) {
-        if ((e.target.id === 'work-view' || e.target.id === 'work-images' || e.target.id === 'extra') && !transitioning) {
+        if (((e.target.id === 'work-view' || e.target.id === 'work-images' || e.target.id === 'extra') && !transitioning) || (mobile)) {
             transitioning = true;
             let vids = document.getElementsByTagName('video');
             if (vids) {
@@ -263,11 +267,7 @@ function init() {
                 };
             };
             work.style.opacity = '0';
-            if (mobile) {
-                title.parentNode.style.display = 'flex';
-            } else {
-                title.innerHTML = 'Esther Merinero';
-            };
+            title.innerHTML = 'Esther Merinero';
             document.body.style.overflowY = 'scroll';
             document.body.style.backgroundColor = 'white';
             if (loadingInt) {
@@ -321,7 +321,7 @@ function init() {
 
             workOpen = e.target.alt;
             if (mobile) {
-                title.parentNode.style.display = 'none';
+                title.innerHTML = '<p>close</p>';
             } else {
                 title.innerHTML = e.target.alt;
             };
@@ -421,7 +421,7 @@ function init() {
             extra.innerHTML = works[e.target.alt].extra.indexOf('<p>') === -1 ? `<p>${works[e.target.alt].extra}</p>` : `${works[e.target.alt].extra}`;
 
             // show
-            e.target.style.filter = mobile ? 'drop-shadow(0px 0px 0px rgb(0, 0, 0)) brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
+            e.target.style.filter = mobile ? 'brightness(1)' : 'drop-shadow(8px 8px 20px rgb(0, 0, 0)) brightness(0)';
             work.style.display = 'block' ;
             work.scrollTop = 0;
             work.style.opacity = '1';
@@ -467,14 +467,14 @@ function init() {
                     };
                 };
             } else {
-                extra.style.marginBottom = '30vh';
+                extra.style.marginBottom = mobile ? '20vh' : '30vh';
             };
 
             let media = document.getElementsByClassName('media');
             for (let i = 0; i < media.length; i++) {
                 if (works[target].media[i].layout === 'horizontal-single' || works[target].media[i].layout === 'vertical-single') {
                     if (mobile) {
-                        media[i].parentElement.style.width = '90%';
+                        media[i].parentElement.style.width = '94%';
                     } else {
                         media[i].parentElement.style.height = '80vh';
                     };
@@ -492,7 +492,7 @@ function init() {
                     };
                 } else if (works[target].media[i].layout === 'vertical-double') {
                     if (mobile) {
-                        media[i].parentElement.style.width = '90%';
+                        media[i].parentElement.style.width = '94%';
                     } else {
                         media[i].parentElement.style.height = '80vh';
                     };
@@ -522,7 +522,7 @@ function init() {
     };
 
     // event listeners
-    title.addEventListener('click', titleClick);
+    title.addEventListener('click', (e) => titleClick(e));
     work.addEventListener('click', (e) => workClose(e));
     info.addEventListener('click', (e) => infoClose(e));
     for (var i = 0; i < imgs.length; i++) {
