@@ -466,6 +466,7 @@ video {
         text-align: center;
         padding: 0px;
         margin: 3vw 0vw;
+        max-width: 94%;
     }
 
     #work-deets p {
@@ -490,6 +491,10 @@ video {
     .mediaWrap img {
         height: auto;
         padding: 0px;
+    }
+
+    .mediaWrap video {
+        height: auto;
     }
 
     .media-description, .media-text {
