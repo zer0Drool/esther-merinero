@@ -363,7 +363,7 @@ function init() {
                     elem = document.createElement('video');
                     elem.src = works[e.target.alt].media[i].url;
                     elem.controls = true;
-                    elem.playsinline = true;
+                    elem.playsInline = true;
                     elem.preload = 'auto';
                    //  elem.onloadedmetadata = () => {
                    //      if (elem.buffered.length === 0) return;
