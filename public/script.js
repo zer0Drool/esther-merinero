@@ -136,9 +136,9 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
 
     for (var i = 0; i < bio.children.length; i++) {
         if (bio.children[i].style.paddingLeft) {
-            bio.children[i].style.paddingLeft = '20%';
+            bio.children[i].style.paddingLeft = mobile ? '13%' : '20%';
         } else {
-            bio.children[i].style.paddingRight = '20%';
+            bio.children[i].style.paddingRight = mobile ? '13%' : '20%';
         };
     };
 
@@ -380,7 +380,7 @@ function init() {
                 div.appendChild(elem);
 
                 // checking for description
-                if (works[e.target.alt].media[i].description) {
+                if (works[e.target.alt].media[i].description && !mobile) {
                     let description = document.createElement('div');
                     description.classList.add('media-description');
                     description.innerHTML = works[e.target.alt].media[i].description;
@@ -449,13 +449,18 @@ function init() {
             for (var i = 0; i < medText.length; i++) {
                 for (var j = 0; j < medText[i].children.length; j++) {
                     if (medText[i].children[j].style.paddingLeft) {
-                        medText[i].children[j].style.paddingLeft = '20%';
+                        medText[i].children[j].style.paddingLeft = mobile ? '13%' : '20%';
                     } else {
-                        medText[i].children[j].style.paddingRight = '20%';
+                        medText[i].children[j].style.paddingRight = mobile ? '13%' : '20%';
                     };
-                    // if (mobile) {
-                    //     medText[i].children[j].children[0].style.fontSize = '4.5vmin';
-                    // };
+                    if (medText[i].children[j].style.fontSize && mobile) {
+                        console.log('xxxx', medText[i].children[j]);
+                        if (medText[i].children[j].style.fontSize === '2.3vmin') {
+                            medText[i].children[j].style.fontSize = '4.3vmin';
+                        } else if (medText[i].children[j].style.fontSize === '2vmin') {
+                            medText[i].children[j].style.fontSize = '3.5vmin';
+                        };
+                    };
                 };
             };
             let italics = document.getElementsByClassName('italic-text');

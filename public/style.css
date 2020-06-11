@@ -438,7 +438,7 @@ video {
     }
 
     h1 {
-        font-size: 2.2rem;
+        font-size: 11vmin;
         user-select: none;
     }
 
@@ -474,8 +474,12 @@ video {
     }
 
     #work-deets p {
-        font-size: 4.5vmin;
+        font-size: 4.3vmin;
         margin-right: 0px;
+    }
+
+    #work-deets p:first-of-type {
+        font-style: italic;
     }
 
     #work-images {
@@ -493,7 +497,7 @@ video {
     }
 
     .media-text span {
-        font-size: 4.5vmin !important;
+        /* font-size: 4.3vmin !important; */
     }
 
     .mediaWrap img {
@@ -510,7 +514,7 @@ video {
     }
 
     .media-description p {
-        font-size: 4.5vmin;
+        font-size: 4.3vmin;
         text-align: center;
     }
 
@@ -524,7 +528,7 @@ video {
 
     #extra p {
         max-width: 90%;
-        font-size: 4.5vmin;
+        font-size: 4.3vmin;
     }
 
     #info {
@@ -533,16 +537,20 @@ video {
     }
 
     #icons {
-        width: 90%;
+        width: 94%;
         margin: 0 auto;
     }
 
+    #bio {
+        margin-top: 1vh;
+    }
+
     #bio span {
-        font-size: 4.5vmin !important;
+        font-size: 4.3vmin !important;
     }
 
     #cv {
-        font-size: 4.5vmin;
+        font-size: 4.3vmin;
     }
 
     .contactIconOuter {
@@ -558,18 +566,11 @@ video {
         width: 100%;
     }
 
-    /* #icons a {
-        position: relative;
-        margin-left: 0;
-        margin-top: 0;
-    } */
-
     #credits {
         position: relative;
-        margin-top: 150px;
-        margin-left: 5%;
-        margin-bottom: 10px;
-        font-size: 10px;
+        margin-top: 29vh;
+        margin-left: 3%;
+        font-size: 3.5vmin;
     }
 
     #credits a {
@@ -580,8 +581,5 @@ video {
     }
 
     #cornerImg {
-        position: relative;
-        width: 40%;
-        margin-left: 55%;
-        margin-bottom: 50px;
+        display: none;
 }
