@@ -59,7 +59,11 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             let shadow = `${i}_text_shadow`;
             let url = work[type] === 'image' ? `${i}_image` : `${i}_video`;
             work[description] = work[description] ? work[description].replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>') : work[description];
-            work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>') : work[text];
+            if (mobile) {
+                work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>').replace(new RegExp('font-size: 2.3vmin', 'g'), 'font-size: 4.3vmin').replace(new RegExp('font-size: 2vmin', 'g'), 'font-size: 3.5vmin') : work[text];
+            } else {
+                work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>') : work[text];
+            };
 
             if (work[url]) {
                 let mediaObj = {
