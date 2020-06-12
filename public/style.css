@@ -553,13 +553,10 @@ video {
         font-size: 4.3vmin;
     }
 
-    .contactIconOuter {
-        display: inline-block;
-        position: initial;
-        width: 10%;
-        margin-left: 9%;
-        margin-top: 30px;
-        transform: rotate(0deg);
+    .contactIconWrap {
+        position: relative;
+        height: 38vh;
+        /* background-color: lime; */
     }
 
     .contactIconOuter img {
@@ -568,7 +565,7 @@ video {
 
     #credits {
         position: relative;
-        margin-top: 29vh;
+        /* margin-top: 38vh; */
         margin-left: 3%;
         font-size: 3.5vmin;
     }
@@ -582,4 +579,18 @@ video {
 
     #cornerImg {
         display: none;
+    }
+
+    .contactIconOuter:nth-of-type(1) {
+        top: 21%;
+    }
+
+    .contactIconOuter:nth-of-type(2) {
+        top: 71%;
+    }
+
+    .contactIconOuter:nth-of-type(3) {
+        top: 46%;
+    }
+
 }
