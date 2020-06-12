@@ -40,7 +40,9 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
             x: work.x,
             y: work.y,
             width: work.width,
-            // description: work.description,
+            mobileX: work.mobile_x,
+            mobileY: work.mobile_y,
+            mobileWidth: work.mobile_width,
             dimensions: work.dimensions,
             materials: work.materials,
             extra: work.extra_x.replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>'),
@@ -103,9 +105,9 @@ axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
         };
         icons.push(icon);
         icon.classList.add('homepageImgs');
-        icon.style.left = `${details.x}%`;
-        icon.style.top = `${details.y}px`;
-        icon.style.width = mobile ? `${parseInt(details.width) + 12}vh` : `${details.width}vh`;
+        icon.style.left = mobile ? `${details.mobileX}%` : `${details.x}%`;
+        icon.style.top = mobile ? `${details.mobileY}px` : `${details.y}px`;
+        icon.style.width = mobile ? `${details.mobileWidth}vh` : `${details.width}vh`;
         icon.alt = title;
         icon.src = details.icon;
     };

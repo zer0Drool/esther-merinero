@@ -447,6 +447,7 @@ video {
     }
 
     .homepageImgs {
+        position: absolute;
         max-width: 95%;
         filter: brightness(1);
     }
