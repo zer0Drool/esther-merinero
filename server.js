@@ -3,6 +3,10 @@ const app = express();
 
 app.use(express.static('./public'));
 
+app.get('/ctrl', (req, res) => {
+    res.redirect('https://esthermerinero.dreamhosters.com/wp-admin');
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });

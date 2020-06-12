@@ -27,7 +27,7 @@ let works = {};
 let icons = [];
 
 // axios.get('http://192.168.0.78/estherm/index.php/wp-json/wp/v2/works/?per_page=100')
-axios.get('https://esthermerinero.com/wp-json/wp/v2/works/?per_page=100')
+axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/works/?per_page=100')
 .then(res => {
     res.data.map(post => {
 
@@ -124,7 +124,7 @@ let mail = document.getElementById('mail');
 let insta = document.getElementById('insta');
 let phone = document.getElementById('telephone');
 
-axios.get('https://esthermerinero.com/wp-json/wp/v2/info/?per_page=100')
+axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/info/?per_page=100')
 .then(res => {
     let data = res.data[0].acf;
     // console.log(data);
