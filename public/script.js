@@ -461,8 +461,16 @@ function init() {
                     };
                     if (medText[i].children[j].style.fontSize && mobile) {
                         console.log('xxxx', medText[i].children[j]);
-                        if (medText[i].children[j].style.fontSize === '2.3vmin') {
+                        if (medText[i].children[j].style.fontSize === '2.5vmin') {
+                            medText[i].children[j].style.fontSize = '4.75vmin';
+                        } else if (medText[i].children[j].style.fontSize === '2.4vmin') {
+                            medText[i].children[j].style.fontSize = '4.5vmin';
+                        } else if (medText[i].children[j].style.fontSize === '2.3vmin') {
                             medText[i].children[j].style.fontSize = '4.3vmin';
+                        } else if (medText[i].children[j].style.fontSize === '2.2vmin') {
+                            medText[i].children[j].style.fontSize = '4vmin';
+                        } else if (medText[i].children[j].style.fontSize === '2.1vmin') {
+                            medText[i].children[j].style.fontSize = '3.75vmin';
                         } else if (medText[i].children[j].style.fontSize === '2vmin') {
                             medText[i].children[j].style.fontSize = '3.5vmin';
                         };
