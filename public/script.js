@@ -62,7 +62,7 @@ axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/works/?per_page
             let url = work[type] === 'image' ? `${i}_image` : `${i}_video`;
             work[description] = work[description] ? work[description].replace(new RegExp('<em>', 'g'), '<span class="italic">').replace(new RegExp('</em>', 'g'), '</span>') : work[description];
             if (mobile) {
-                work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>').replace(new RegExp('font-size: 2.3vmin', 'g'), 'font-size: 4.3vmin').replace(new RegExp('font-size: 2vmin', 'g'), 'font-size: 3.5vmin') : work[text];
+                work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>').replace(new RegExp('font-size: 2.5vmin', 'g'), 'font-size: 4.75vmin').replace(new RegExp('font-size: 2.4vmin', 'g'), 'font-size: 4.5vmin').replace(new RegExp('font-size: 2.3vmin', 'g'), 'font-size: 4.3vmin').replace(new RegExp('font-size: 2.2vmin', 'g'), 'font-size: 4vmin').replace(new RegExp('font-size: 2.1vmin', 'g'), 'font-size: 3.75vmin').replace(new RegExp('font-size: 2vmin', 'g'), 'font-size: 3.5vmin') : work[text];
             } else {
                 work[text] = work[text] ? work[text].replace(new RegExp('<em>', 'g'), '<span class="italic-text">').replace(new RegExp('</em>', 'g'), '</span>') : work[text];
             };
@@ -459,22 +459,22 @@ function init() {
                     } else {
                         medText[i].children[j].style.paddingRight = mobile ? '13%' : '20%';
                     };
-                    if (medText[i].children[j].style.fontSize && mobile) {
-                        console.log('xxxx', medText[i].children[j]);
-                        if (medText[i].children[j].style.fontSize === '2.5vmin') {
-                            medText[i].children[j].style.fontSize = '4.75vmin';
-                        } else if (medText[i].children[j].style.fontSize === '2.4vmin') {
-                            medText[i].children[j].style.fontSize = '4.5vmin';
-                        } else if (medText[i].children[j].style.fontSize === '2.3vmin') {
-                            medText[i].children[j].style.fontSize = '4.3vmin';
-                        } else if (medText[i].children[j].style.fontSize === '2.2vmin') {
-                            medText[i].children[j].style.fontSize = '4vmin';
-                        } else if (medText[i].children[j].style.fontSize === '2.1vmin') {
-                            medText[i].children[j].style.fontSize = '3.75vmin';
-                        } else if (medText[i].children[j].style.fontSize === '2vmin') {
-                            medText[i].children[j].style.fontSize = '3.5vmin';
-                        };
-                    };
+                    // if (medText[i].children[j].style.fontSize && mobile) {
+                    //     console.log('xxxx', medText[i].children[j]);
+                    //     if (medText[i].children[j].style.fontSize === '2.5vmin') {
+                    //         medText[i].children[j].style.fontSize = '4.75vmin';
+                    //     } else if (medText[i].children[j].style.fontSize === '2.4vmin') {
+                    //         medText[i].children[j].style.fontSize = '4.5vmin';
+                    //     } else if (medText[i].children[j].style.fontSize === '2.3vmin') {
+                    //         medText[i].children[j].style.fontSize = '4.3vmin';
+                    //     } else if (medText[i].children[j].style.fontSize === '2.2vmin') {
+                    //         medText[i].children[j].style.fontSize = '4vmin';
+                    //     } else if (medText[i].children[j].style.fontSize === '2.1vmin') {
+                    //         medText[i].children[j].style.fontSize = '3.75vmin';
+                    //     } else if (medText[i].children[j].style.fontSize === '2vmin') {
+                    //         medText[i].children[j].style.fontSize = '3.5vmin';
+                    //     };
+                    // };
                 };
             };
             let italics = document.getElementsByClassName('italic-text');
