@@ -558,7 +558,11 @@ function init() {
 
     // event listeners
     title.addEventListener('click', (e) => titleClick(e));
-    work.addEventListener('click', (e) => workClose(e));
+    work.addEventListener('click', (e) => {
+        if (!mobile) {
+            workClose(e);
+        };
+    });
     info.addEventListener('click', (e) => infoClose(e));
     for (var i = 0; i < imgs.length; i++) {
         imgs[i].addEventListener('mouseover', (e) => workMouseover(e));
