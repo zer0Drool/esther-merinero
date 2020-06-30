@@ -393,6 +393,11 @@ video {
     position: relative;
     text-decoration: none;
     color: black;
+    transition: text-shadow 0.5s linear;
+}
+
+#credits a:hover {
+    text-shadow: 0px 0px 1px black;
 }
 
 
@@ -453,7 +458,7 @@ video {
     }
 
     .homepageImgs:first-of-type {
-        margin-top: 100px;
+        /* margin-top: 100px; */
     }
 
     .homepageImgs:last-of-type {
