@@ -60,6 +60,7 @@ body {
 
 #loading-wrap {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -68,7 +69,15 @@ body {
     height: 100%;
     top: 0;
     left: 0;
+    opacity: 0;
+    transition: opacity 0.3s linear;;
     pointer-events: none;
+    text-align: center;
+    /* background-color: lime; */
+}
+
+#loading-wrap p {
+    width: 65%;
 }
 
 #loading-text {

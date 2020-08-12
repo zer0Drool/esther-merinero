@@ -20,9 +20,31 @@ let title = document.getElementsByTagName('h1')[0];
 
 // loadingInt = setInterval(loading, 250);
 
-// get work data
+// get upcoming data
 let dataFetchCount = 0;
+let expectedDataFetchCount = 2;
 
+let upcomingData;
+axios
+    .get(
+        "https://esthermerinero.dreamhosters.com/wp-json/wp/v2/upcoming/?per_page=100"
+    )
+    .then((res) => {
+        if (res.data[0].acf.details) {
+            expectedDataFetchCount = 3;
+            upcomingData = res.data[0].acf.details;
+            console.log("upcoming:", upcomingData);
+            loadingWrap.innerHTML = upcomingData;
+            dataFetchCount++;
+            if (dataFetchCount === expectedDataFetchCount) {
+                console.log('yeet');
+                upcoming();
+            };
+        }; 
+    })
+    .catch((err) => console.log("error fetching upcoming >>> ", err));
+
+// get work data
 let works = {};
 let icons = [];
 
@@ -31,7 +53,7 @@ axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/works/?per_page
 .then(res => {
     res.data.map(post => {
 
-        console.log(post);
+        // console.log(post);
         let work = post.acf;
         let title = work.name.replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace('(', '<span style="margin-right: 12px;">(</span>').replace(')', '<span style="margin-left: 12px;">)</span>');
         // let title = work.name.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#8212;/g, "-").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'");
@@ -86,7 +108,7 @@ axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/works/?per_page
 .then(() => {
     // console.log(Object.entries(works));
     let worksArr = Object.entries(works);
-    console.log(worksArr);
+    // console.log(worksArr);
     let worksLoadCount = 0;
     for (var i = 0; i < worksArr.length; i++) {
         let title = worksArr[i][0];
@@ -98,8 +120,12 @@ axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/works/?per_page
                 console.log('all loaded bb');
                 dataFetchCount++;
                 // console.log('work loaded', dataFetchCount);
-                if (dataFetchCount === 2) {
-                    init();
+                if (dataFetchCount === expectedDataFetchCount) {
+                    if (upcomingData) {
+                        upcoming();
+                    } else {
+                        init();
+                    }
                 };
             };
         };
@@ -156,17 +182,36 @@ axios.get('https://esthermerinero.dreamhosters.com/wp-json/wp/v2/info/?per_page=
     phone.href = info.phone;
     dataFetchCount++;
     // console.log('info loaded', dataFetchCount);
-    if (dataFetchCount === 2) {
-        init();
+    if (dataFetchCount === expectedDataFetchCount) {
+        if (upcomingData) {
+            upcoming();
+        } else {
+            init();
+        };
     };
 })
 .catch(err => console.log('error fetching info >>> ', err));
+
+function upcoming() {
+
+    console.log('esthers up to summit yo');
+    title.style.animation = "none";
+    loadingWrap.style.opacity = '1';
+    document.body.addEventListener('click', init);
+
+};
 
 function init() {
 
     console.log('lets go');
 
-    title.style.animation = 'none';
+    if (upcomingData) {
+        document.body.removeEventListener('click', init);
+        loadingWrap.style.display = 'none';
+    } else {
+        title.style.animation = 'none';
+    };
+
 
     // clearInterval(loadingInt);
     // loadingCount = 0;
