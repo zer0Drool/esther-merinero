@@ -73,11 +73,13 @@ body {
     transition: opacity 0.3s linear;;
     pointer-events: none;
     text-align: center;
-    /* background-color: lime; */
+    background-color: rgb(130, 164, 212);
 }
 
-#loading-wrap p {
+#loading-wrap p span {
     width: 65%;
+    font-size: 4.3vmin !important;
+    line-height: 10vmin;
 }
 
 #loading-text {
@@ -444,6 +446,12 @@ video {
 } */
 
 @media (hover: none) and (pointer: coarse) {
+
+    #loading-wrap p span {
+        width: 65%;
+        font-size: 6vmin !important;
+        line-height: 12vmin;
+    }
 
     #title-wrap {
         bottom: 10vh;
